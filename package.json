@@ -1,0 +1,28 @@
+{
+  "name": "bookstore",
+  "version": "1.0.0",
+  "description": "api used to sell books",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leonardovff/nodejs-bookstore-api.git"
+  },
+  "keywords": [
+    "node.js",
+    "typescript",
+    "prisma",
+    "mongodb",
+    "javascript",
+    "api",
+    "restapi"
+  ],
+  "author": "leonardovff",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leonardovff/nodejs-bookstore-api/issues"
+  },
+  "homepage": "https://github.com/leonardovff/nodejs-bookstore-api#readme"
+}
