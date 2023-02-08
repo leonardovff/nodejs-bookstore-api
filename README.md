@@ -40,3 +40,8 @@ docker compose up -d mongo-ui
 ```bash
 docker compose up node
 ```
+
+### Run commands inside the node container
+```bash
+docker compose exec node bash
+```
