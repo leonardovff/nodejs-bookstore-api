@@ -6,6 +6,9 @@ Docker and docker compose (it is installed together with docker in the last vers
 
 ## Development setup
 ```bash
+# Copy the .env-example to .env
+cp .env-example .env
+
 # It will init all the containers required to run the project
 docker compose up -d
 
@@ -16,13 +19,16 @@ docker compose logs
 docker compose logs node
 ```
 
-## Develment setup steps by step
+## Development setup: steps by step
 1. Start the mongodb server
 ```bash
+# Copy the .env-example to .env
+cp .env-example .env
+
 # Up the containers with mongodb working with replicas (it is required by prisma)
 docker compose up -d mongo1 mongo2 mongo3
 ```
-2. If you want there is a web visual client for mongodb in the project:
+2. If you want, there is a web visual client for mongodb in the project:
 ```bash
 # Up the containers with mongo-express (the web visual client)
 docker compose up -d mongo-ui
