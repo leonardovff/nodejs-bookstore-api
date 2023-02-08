@@ -45,3 +45,10 @@ docker compose up node
 ```bash
 docker compose exec node bash
 ```
+
+
+### To improve developer experience - we recommend:
+- Use in vscode the following extensions:
+1. editorconfig
+2. eslint
+3. prisma
