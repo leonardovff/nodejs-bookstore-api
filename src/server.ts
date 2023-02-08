@@ -1,11 +1,11 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 import express  from 'express';
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 const setupExpress = () => {
   const app = express();
-  app.use(express.json())
+  app.use(express.json());
 
   app.post('/users', async (req, res) => {
     const { email, name } = req.body;
@@ -14,7 +14,7 @@ const setupExpress = () => {
         name,
         email
       }
-    })
+    });
 
     res.status(200).send();
   });
@@ -29,7 +29,7 @@ const setupExpress = () => {
     console.log(`Http server started on the port ${port}`);
   });
   return app;
-}
+};
 
 async function main() {
   await prisma.$connect();
@@ -41,7 +41,7 @@ main()
     // await prisma.$disconnect()
   })
   .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
