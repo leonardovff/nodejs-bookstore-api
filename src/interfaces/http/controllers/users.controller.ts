@@ -1,4 +1,4 @@
-import { dbClient } from './../interfaces/database/mongodb-client';
+import dbClient from '../../../infrastructure/database-client';
 
 export const createUser = async (req, res) => {
   const { email, name } = req.body;
@@ -10,9 +10,9 @@ export const createUser = async (req, res) => {
   });
 
   res.status(200).send();
-}
+};
 
 export const getUsers = async (req, res) => {
   const allUsers = await dbClient.user.findMany();
   res.status(200).send(allUsers);
-}
+};

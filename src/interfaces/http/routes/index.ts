@@ -1,8 +1,8 @@
-import booksRoutes from './books.routes';
-import userRouters from './users.routes';
+// import booksRoutes from './books.routes';
+import userRoutes from './users.routes';
 
-export const setupRoutes = (server) => {
-  server.use('/users', userRouters);
-  server.use('/books', booksRoutes);
-  return server;
-};
+const appRoutes = [
+  ...userRoutes,
+];
+
+export default appRoutes;

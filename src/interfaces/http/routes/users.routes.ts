@@ -1,8 +1,16 @@
-import express from 'express';
-import { createUser, getUsers } from '../../../controllers/users.controller';
+import { IHttpRoute } from '../routes.interface';
+import { createUser, getUsers } from '../controllers/users.controller';
 
-const userRouters = express.Router();
-userRouters.get('/', getUsers);
-userRouters.post('/', createUser);
-
-export default userRouters;
+const userRoutes: IHttpRoute[] = [
+  {
+    route: '/users',
+    method: 'get',
+    handler:  getUsers,
+  },
+  {
+    route: '/users',
+    method: 'post',
+    handler:  createUser,
+  }
+];
+export default userRoutes;

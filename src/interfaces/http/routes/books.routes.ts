@@ -1,7 +1,11 @@
-import express from 'express';
-import { getBooks } from '../../../controllers/books.controller';
+import { IHttpRoute } from '../routes.interface';
+import { getBooks } from '../controllers/books.controller';
 
-const booksRoutes = express.Router();
-booksRoutes.get('/', getBooks);
-
+const booksRoutes: IHttpRoute[] = [
+  {
+    route: '/books',
+    method: 'get',
+    handler:  getBooks,
+  },
+];
 export default booksRoutes;
