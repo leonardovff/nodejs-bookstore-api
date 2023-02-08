@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "dev": "node --watch --loader ts-node/esm ./src/server.ts"
+    "dev": "node --require ./src/suppress-experimental-fetch-warnings.js --watch --trace-warnings --experimental-loader ts-node/esm ./src/server.ts"
   },
   "repository": {
     "type": "git",
