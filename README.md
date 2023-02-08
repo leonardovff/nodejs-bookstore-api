@@ -1,28 +1,36 @@
-## BOOKSTORE NODE.JS API
+# BOOKSTORE NODE.JS API
 A bookstore API created using node.js, typescript/javascript, mongodb, prisma orm, and jest.
 
 ## Requirements to run the project
-Node.js 19+ and docker
+Docker and docker compose (it is installed together with docker in the last versions)
 
-## Setup the database
+## Development setup
+```bash
+# It will init all the containers required to run the project
+docker compose up -d
+
+# If you want to check the logs you can use
+docker compose logs
+
+# or if you want to check the logs of just one container
+docker compose logs node
+```
+
+## Develment setup steps by step
+1. Start the mongodb server
 ```bash
 # Up the containers with mongodb working with replicas (it is required by prisma)
-docker-compose up -d
-
-# add the dns alias to the mongodb containers
-sudo cat << EOF >> /etc/hosts
-127.0.0.1 mongodb1
-127.0.0.1 mongodb2
-127.0.0.1 mongodb3
-EOF
+docker compose up -d mongo1 mongo2 mongo3
 ```
-
-## Developer server
+2. If you want there is a web visual client for mongodb in the project:
 ```bash
-npx prisma generate
-npm run dev
+# Up the containers with mongo-express (the web visual client)
+docker compose up -d mongo-ui
+
+# Now you can open the link http://localhost:8086 in your browser
 ```
 
-## Others
-- If you want there is a visual client for mongodb in the project, you just need to open in the browser the link:
-http://localhost:8086
+3. Start the dev server container
+```bash
+docker compose up node
+```
