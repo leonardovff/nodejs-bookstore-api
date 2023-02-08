@@ -8,7 +8,6 @@ services:
       - 8082:8082
     volumes:
       - .:/app
-      - /app/node_modules
     working_dir: '/app'
     command: sh -c "npm ci && npm run dev"
     environment:

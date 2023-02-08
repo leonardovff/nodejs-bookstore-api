@@ -1,7 +1,9 @@
 import express  from 'express';
+import expressOasGenerator from 'express-oas-generator';
 
 export const setupHttpServer = () => {
   const app = express();
+  expressOasGenerator.init(app, {});
   app.use(express.json());
   return app;
 };
@@ -12,5 +14,5 @@ export const startHttpServer = (app) => {
     console.info(`Http server started on the port ${port}`);
   });
   return app;
-}
+};
 
