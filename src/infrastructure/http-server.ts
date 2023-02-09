@@ -26,6 +26,13 @@ export const setupHttpRoutes = (
   routes: IHttpRoute[]
 ) => {
   routes.forEach(route => {
-    app[route.method](route.route, route.handler);
+    app[route.method](route.route, async (req, res) => {
+      try {
+        await route.handler(req, res);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send();
+      }
+    });
   });
 };
