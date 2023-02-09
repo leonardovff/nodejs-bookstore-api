@@ -1,4 +1,4 @@
-import dbClient from '../../../infrastructure/database-client';
+import dbClient from '../../../infrastructure/database/database-client';
 
 export const createUser = async (req, res) => {
   const { email, name } = req.body;
