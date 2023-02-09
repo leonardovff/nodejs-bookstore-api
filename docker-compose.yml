@@ -5,7 +5,7 @@ services:
     expose:
       - $APP_PORT
     ports:
-      - $APP_PORT
+      - $APP_PORT:$APP_PORT
     volumes:
       - .:/app
     working_dir: '/app'
