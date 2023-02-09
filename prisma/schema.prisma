@@ -16,9 +16,10 @@ model User {
   name    String
 }
 
-model Books {
+model Book {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
   title    String    @unique
-  body     String
+  ISBN13     String
   author   String
+  priceCents Int
 }

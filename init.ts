@@ -1,4 +1,4 @@
-import * as dbCliente from './src/infrastructure/database-client';
+import * as dbCliente from './src/infrastructure/database/database-client';
 import { setupHttpServer, startHttpServer, setupHttpRoutes } from './src/infrastructure/http-server';
 import appRoutes from './src/interfaces/http/routes';
 
@@ -6,8 +6,8 @@ async function init() {
   await dbCliente.connect();
   const server = setupHttpServer();
   setupHttpRoutes(server, appRoutes);
-  const sucess = await startHttpServer(server);
-  console.info(sucess);
+  const success = await startHttpServer(server);
+  console.info(success);
 }
 
 init()

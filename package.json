@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "dev": "node --require ./src/suppress-experimental-fetch-warnings.js --watch --trace-warnings --experimental-loader ts-node/esm ./init.ts",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "seed": "ts-node src/infrastructure/database/seed.ts"
   },
   "repository": {
     "type": "git",
