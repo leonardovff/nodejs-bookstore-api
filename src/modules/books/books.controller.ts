@@ -1,6 +1,6 @@
-import dbClient from '../../infrastructure/database/database-client';
+import * as BookService from './books.service';
 
-export const getBooks = async (req, res) => {
-  const books = await dbClient.book.findMany();
-  res.status(200).send(books);
+export const getBooks = async () => {
+  const books = await BookService.getBooks({});
+  return { code: 200, payload: books};
 };

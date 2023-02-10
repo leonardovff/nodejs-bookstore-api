@@ -1,18 +1,16 @@
 import dbClient from '../../infrastructure/database/database-client';
 
-export const createUser = async (req, res) => {
-  const { email, name } = req.body;
+export const createUser = async ({ body: { email, name}}) => {
   await dbClient.user.create({
     data: {
       name,
       email
     }
   });
-
-  res.status(200).send();
+  return { code: 200 };
 };
 
-export const getUsers = async (req, res) => {
+export const getUsers = async () => {
   const allUsers = await dbClient.user.findMany();
-  res.status(200).send(allUsers);
+  return { code: 200, payload: allUsers };
 };

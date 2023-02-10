@@ -1,11 +1,11 @@
-// import booksRoutes from '../../modules/books/books.routes';
-// import userRoutes from '../../modules/users/users.routes';
+import { booksRoutes } from '../../modules/books';
 import { ordersRoutes } from '../../modules/orders';
+import { userRoutes } from '../../modules/users';
 
 const appRoutes = [
-  // ...booksRoutes,
+  ...booksRoutes,
   ...ordersRoutes,
-  // ...userRoutes,
+  ...userRoutes,
 ];
 
 export default appRoutes;
