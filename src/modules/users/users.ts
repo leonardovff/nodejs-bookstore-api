@@ -1,10 +1,12 @@
 const createUser = ({ email, name }, userFoundByEmail? : { email }) => {
   if(userFoundByEmail && userFoundByEmail.email === email){
-    return false;
+    return { error: { type: 'UserAlreadyExistWithTheSameEmail', details: { email }}};
   }
   return {
-    email,
-    name
+    data: {
+      email,
+      name
+    }
   };
 };
 

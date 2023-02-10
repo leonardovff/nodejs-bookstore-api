@@ -11,8 +11,8 @@ export const createOrder = async ({ body: { userId, booksIds }}) => {
       BookNotFound: { message: 'Some bookId passed not exist', code: 404 },
       UserNotFound: { message: 'The userId passed not exist', code: 404 },
     };
-    const { code, message } = errors[error.type];
-    return { code, payload: { message, details: error.details } };
+    const { code, message } = errors[error.type] || { message: 'NotMapped', code: 500};
+    return { code, payload: { message, details: error.details } } ;
   }
 
   return { code: 200, payload: data };

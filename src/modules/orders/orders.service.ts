@@ -34,7 +34,6 @@ export const getOrders = async (
   fields,
 ) => {
   const where = userId ? { userId } : undefined;
-  console.log(where, fields);
   const orders = await dbClient.order.findMany({
     where,
     select: fields,

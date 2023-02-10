@@ -39,7 +39,7 @@ const setupRoutes = (
       try {
         const requestFields = getImportFieldsFromExpressRequest(req);
         const { code, payload } = await route.handler(requestFields);
-        res.status(code).send(payload);
+        res.status(code || 200).send(payload);
       } catch (error) {
         console.error(error);
         res.status(500).send();

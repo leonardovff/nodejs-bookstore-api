@@ -8,15 +8,19 @@ const createUser = async ({ email, name }) => {
     }
   });
 
-  const userData = Users.createUser({ email, name }, userFound);
-  if(!userData) {
-    return false;
+  const { error, data } = Users.createUser({ email, name }, userFound);
+
+  if(error) {
+    return { error };
   }
 
-  return await dbClient.user.create({
-    data: userData,
-  });
+  return {
+    userCreated: await dbClient.user.create({
+      data
+    })
+  };
 };
+
 const getUsers = async({ usersIds } : { usersIds?: string[]}) => {
   const where = { id: undefined };
   if(usersIds) {
