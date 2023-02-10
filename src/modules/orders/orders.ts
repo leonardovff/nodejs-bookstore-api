@@ -27,7 +27,7 @@ const create = ({
   }
   const totalPriceCents = calculateTotalPriceCentsForOneOrder(booksIds, booksPrices);
   return {
-    order: {
+    data: {
       userId,
       totalPriceCents,
       bookIds: booksIds,

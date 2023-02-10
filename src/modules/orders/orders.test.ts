@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto';
 import Orders from './orders';
 
-describe.only('Orders entity - create', () => {
+describe('Orders entity - create', () => {
   test('should create a order when there is just one book', () => {
     const bookId1 = randomUUID();
     const userId = randomUUID();
@@ -9,14 +9,14 @@ describe.only('Orders entity - create', () => {
       [bookId1]: 2020,
     };
 
-    const { order } = Orders.create({
+    const { data } = Orders.create({
       booksIds: [bookId1],
       booksPrices,
       userId,
     });
 
-    expect(order).toBeTruthy();
-    expect(order).toMatchObject({
+    expect(data).toBeTruthy();
+    expect(data).toMatchObject({
       userId,
       bookIds: [bookId1],
       totalPriceCents: 2020,
@@ -31,7 +31,7 @@ describe.only('Orders entity - create', () => {
       [bookId2]: 3123,
     };
 
-    const { order: { totalPriceCents } } = Orders.create({
+    const { data: { totalPriceCents } } = Orders.create({
       booksIds: [bookId1, bookId2, bookId1],
       booksPrices,
       userId,

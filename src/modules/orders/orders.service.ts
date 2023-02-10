@@ -10,7 +10,7 @@ export const createOrder = async ({ userId, booksIds }) => {
   }
 
   const booksPrices = await BooksService.getBooksPrice(booksIds);
-  const { error, order } = Orders.create({
+  const { error, data } = Orders.create({
     userId,
     booksIds,
     booksPrices,
@@ -23,7 +23,7 @@ export const createOrder = async ({ userId, booksIds }) => {
   return {
     // TODO: move that to interface?
     data: await dbClient.order.create({
-      data: order
+      data
     })
   };
 };
