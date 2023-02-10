@@ -6,8 +6,8 @@ import environment from '../config/environment';
 export const createHttpServer = (routes: IHttpRoute[]) => {
   const app = express();
   expressOasGenerator.init(app, {});
-  setupHttpRoutes(app, routes);
   app.use(express.json());
+  setupHttpRoutes(app, routes);
   const port = environment.port;
   return {
     info: {

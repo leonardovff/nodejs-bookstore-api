@@ -29,7 +29,7 @@ export const getOrdersForOneUser = async ({ params: { userId } }) => {
 
   return { code: 200, payload: orders};
 };
-export default getOrders;
+
 export const getOrders = async () => {
   const orders = await OrdersService.getOrders({}, {
     id: true,
