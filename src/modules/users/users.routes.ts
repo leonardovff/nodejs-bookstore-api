@@ -1,5 +1,5 @@
-import { IHttpRoute } from '../routes.interface';
-import { createUser, getUsers } from '../controllers/users.controller';
+import { IHttpRoute } from '../../interfaces/http/routes.interface';
+import { createUser, getUsers } from './users.controller';
 
 const userRoutes: IHttpRoute[] = [
   {

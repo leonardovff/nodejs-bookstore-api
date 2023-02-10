@@ -1,5 +1,5 @@
-import { IHttpRoute } from '../routes.interface';
-import { getBooks } from '../controllers/books.controller';
+import { IHttpRoute } from '../../interfaces/http/routes.interface';
+import { getBooks } from './books.controller';
 
 const booksRoutes: IHttpRoute[] = [
   {
