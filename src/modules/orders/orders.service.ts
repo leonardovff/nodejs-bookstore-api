@@ -29,7 +29,7 @@ export const getOrders = async (
   { userId } : { userId?: string },
   fields,
 ) => {
-  const where = userId ? { userId } : {};
+  const where = userId ? { userId } : undefined;
   const orders = await dbClient.order.findMany({
     where,
     select: fields,

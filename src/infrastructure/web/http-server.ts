@@ -38,8 +38,8 @@ const setupHttpRoutes = (
     app[route.method](route.route, async (req: express.Request, res: express.Response) => {
       try {
         const requestFields = getImportFieldsFromExpressRequest(req);
-        const { code, message } = await route.handler(requestFields);
-        res.status(code).send(message);
+        const { code, payload } = await route.handler(requestFields);
+        res.status(code).send(payload);
       } catch (error) {
         console.error(error);
         res.status(500).send();

@@ -1,5 +1,5 @@
-import { createOrder, getOrders, getOrdersForOneUser } from './orders.controller';
 import { IHttpRoute } from '../../interfaces/http/routes.interface';
+import { createOrder, getOrders, getOrdersForOneUser } from '../controllers/orders.controller';
 
 const ordersRoutes: IHttpRoute[] = [
   {

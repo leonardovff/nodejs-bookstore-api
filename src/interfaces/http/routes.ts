@@ -1,6 +1,6 @@
 // import booksRoutes from '../../modules/books/books.routes';
-import ordersRoutes from '../../modules/orders/orders.routes';
 // import userRoutes from '../../modules/users/users.routes';
+import { ordersRoutes } from '../../modules/orders';
 
 const appRoutes = [
   // ...booksRoutes,
