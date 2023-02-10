@@ -1,16 +1,11 @@
-import dbClient from '../../infrastructure/database/database-client';
+import UsersService from './users.service';
 
 export const createUser = async ({ body: { email, name}}) => {
-  await dbClient.user.create({
-    data: {
-      name,
-      email
-    }
-  });
+  await UsersService.createUser({email, name});
   return { code: 200 };
 };
 
 export const getUsers = async () => {
-  const allUsers = await dbClient.user.findMany();
-  return { code: 200, payload: allUsers };
+  const users = await getUsers();
+  return { code: 200, payload: users };
 };

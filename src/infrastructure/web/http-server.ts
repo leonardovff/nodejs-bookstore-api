@@ -7,7 +7,7 @@ export const createHttpServer = (routes: IHttpRoute[]) => {
   const app = express();
   expressOasGenerator.init(app, {});
   app.use(express.json());
-  setupHttpRoutes(app, routes);
+  setupRoutes(app, routes);
   const port = environment.port;
   return {
     info: {
@@ -30,7 +30,7 @@ const startHttpServer = (
   });
 };
 
-const setupHttpRoutes = (
+const setupRoutes = (
   app: express.Application,
   routes: IHttpRoute[]
 ) => {

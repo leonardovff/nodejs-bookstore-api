@@ -9,10 +9,12 @@ describe('Orders entity', () => {
       [bookId1]: 2020,
       [bookId2]: 3123,
     };
+
     const priceCents = calculateTotalPriceCentsForOneOrder(
       [bookId1, bookId2, bookId1],
       booksPrices
     );
+
     expect(priceCents).toEqual(7163);
   });
 });
