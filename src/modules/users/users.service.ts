@@ -13,13 +13,18 @@ const createUser = async ({ email, name }) => {
     return false;
   }
 
-  const user = await dbClient.user.create({
+  return await dbClient.user.create({
     data: userData,
   });
-  user;
 };
-const getUsers = async() => {
-  const allUsers = await dbClient.user.findMany();
+const getUsers = async({ usersIds } : { usersIds?: string[]}) => {
+  const where = { id: undefined };
+  if(usersIds) {
+    where.id = { in: usersIds };
+  }
+  const allUsers = await dbClient.user.findMany({
+    where,
+  });
   return allUsers;
 };
 

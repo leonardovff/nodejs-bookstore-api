@@ -1,20 +1,31 @@
 import dbClient from '../../infrastructure/database/database-client';
 import { BooksService } from '../books';
-import { calculateTotalPriceCentsForOneOrder } from './orders';
+import { UsersService } from '../users';
+import Orders from './orders';
 
-export const calculateTotalOrderPriceCents = async ( bookIds: string[] ) => {
-  const booksPrices = await BooksService.getBooksPrice(bookIds);
-  return calculateTotalPriceCentsForOneOrder(bookIds, booksPrices);
-};
-// TODO: move that to interface?
-export const createOrder = async ({ userId, bookIds, totalPriceCents }) => {
-  await dbClient.order.create({
-    data: {
-      userId,
-      bookIds,
-      totalPriceCents,
-    }
+export const createOrder = async ({ userId, booksIds }) => {
+  const users = await UsersService.getUsers({ usersIds: [userId] });
+  if(!users.length) {
+    return { error: { type: 'UserNotFound', details: { userId }} };
+  }
+
+  const booksPrices = await BooksService.getBooksPrice(booksIds);
+  const { error, order } = Orders.create({
+    userId,
+    booksIds,
+    booksPrices,
   });
+
+  if(error) {
+    return { error };
+  }
+
+  return {
+    // TODO: move that to interface?
+    data: await dbClient.order.create({
+      data: order
+    })
+  };
 };
 
 // TODO: move that to interface?
@@ -23,6 +34,7 @@ export const getOrders = async (
   fields,
 ) => {
   const where = userId ? { userId } : undefined;
+  console.log(where, fields);
   const orders = await dbClient.order.findMany({
     where,
     select: fields,

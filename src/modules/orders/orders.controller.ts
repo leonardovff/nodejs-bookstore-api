@@ -1,16 +1,22 @@
 import * as OrdersService from './orders.service';
 
-export const createOrder = async ({ body: { userId, bookIds }}) => {
-  // Todo: verify if the ids exist in the database here
-  const totalPriceCents = await OrdersService.calculateTotalOrderPriceCents(bookIds);
-
-  await OrdersService.createOrder({
-    totalPriceCents,
+export const createOrder = async ({ body: { userId, booksIds }}) => {
+  const { error, data} = await OrdersService.createOrder({
     userId,
-    bookIds,
+    booksIds,
   });
 
-  return { code: 200 };
+  if(error) {
+    const errors = {
+      BookNotFound: { message: 'Some bookId passed not exist', code: 404 },
+      UserNotFound: { message: 'The userId passed not exist', code: 404 },
+    };
+    const { code, message } = errors[error.type];
+    return { code, payload: { message, details: error.details } };
+  }
+
+  return { code: 200, payload: data };
+
 };
 
 export const getOrdersForOneUser = async ({ params: { userId } }) => {
@@ -43,14 +49,9 @@ export const getOrders = async () => {
         title: true,
         author: true,
         ISBN13: true,
-      },
+      }
     },
-    user: {
-      select: {
-        id: true,
-        name: true,
-      },
-    }
+    user: true
   });
 
   return { code: 200, payload: orders};
