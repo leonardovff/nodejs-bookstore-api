@@ -2,7 +2,7 @@ import * as OrdersService from './orders.service';
 
 export const createOrder = async ({ body: { userId, bookIds }}) => {
   // Todo: verify if the ids exist in the database here
-  const totalPriceCents = await OrdersService.calculateTotalOrderPrice(bookIds);
+  const totalPriceCents = await OrdersService.calculateTotalOrderPriceCents(bookIds);
 
   await OrdersService.createOrder({
     totalPriceCents,

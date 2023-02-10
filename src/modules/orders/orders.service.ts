@@ -1,12 +1,10 @@
 import dbClient from '../../infrastructure/database/database-client';
 import { BooksService } from '../books';
+import { calculateTotalPriceCentsForOneOrder } from './orders';
 
-export const calculateTotalOrderPrice = async ( bookIds: string[] ) => {
+export const calculateTotalOrderPriceCents = async ( bookIds: string[] ) => {
   const booksPrices = await BooksService.getBooksPrice(bookIds);
-  const totalPriceCents = bookIds.reduce(
-    (acc, bookId) => acc + booksPrices[bookId], 0
-  );
-  return totalPriceCents;
+  return calculateTotalPriceCentsForOneOrder(bookIds, booksPrices);
 };
 // TODO: move that to interface?
 export const createOrder = async ({ userId, bookIds, totalPriceCents }) => {

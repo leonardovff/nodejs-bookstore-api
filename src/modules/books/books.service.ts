@@ -11,7 +11,7 @@ export const getBooksPrice = async (bookIds: string[]): Promise<{
   return booksPricesHash;
 };
 
-// move that to interface?
+// TODO: move that to interface?
 export const getBooks = async ({
   ids, authors
 }: {
@@ -20,10 +20,10 @@ export const getBooks = async ({
 }) => {
   let where = {};
   if(ids) {
-    where = {...where, ids: { in: ids }};
+    where = {...where, id: { in: ids }};
   }
   if(authors) {
-    where = {...where, authors: { in: authors }};
+    where = {...where, author: { in: authors }};
   }
   return await dbClient.book.findMany({
     where
