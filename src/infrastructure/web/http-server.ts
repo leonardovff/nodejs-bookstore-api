@@ -5,12 +5,12 @@ import environment from '../config/environment';
 
 export const createHttpServer = (routes: IHttpRoute[]) => {
   const app = express();
+  app.use(express.json());
   expressOasGenerator.handleResponses(app, {
     specOutputPath: './docs/openapi.json',
     specOutputFileBehavior: SPEC_OUTPUT_FILE_BEHAVIOR.PRESERVE    ,
     swaggerDocumentOptions: undefined
   });
-  app.use(express.json());
   setupRoutes(app, routes);
   expressOasGenerator.handleRequests();
   const port = environment.port;
