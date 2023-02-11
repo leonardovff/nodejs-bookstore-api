@@ -1,13 +1,18 @@
 import express  from 'express';
-import expressOasGenerator from 'express-oas-generator';
+import expressOasGenerator, { SPEC_OUTPUT_FILE_BEHAVIOR } from 'express-oas-generator';
 import { IHttpRoute } from '../../interfaces/http/routes.interface';
 import environment from '../config/environment';
 
 export const createHttpServer = (routes: IHttpRoute[]) => {
   const app = express();
-  expressOasGenerator.init(app, {});
+  expressOasGenerator.handleResponses(app, {
+    specOutputPath: './docs/openapi.json',
+    specOutputFileBehavior: SPEC_OUTPUT_FILE_BEHAVIOR.PRESERVE    ,
+    swaggerDocumentOptions: undefined
+  });
   app.use(express.json());
   setupRoutes(app, routes);
+  expressOasGenerator.handleRequests();
   const port = environment.port;
   return {
     info: {

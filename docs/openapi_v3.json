@@ -1,0 +1,260 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "bookstore",
+    "version": "1.0.0",
+    "license": {
+      "name": "MIT"
+    },
+    "description": "Specification JSONs: [v2](/api-spec/v2), [v3](/api-spec/v3).\n\napi used to sell books"
+  },
+  "paths": {
+    "/books": {
+      "get": {
+        "summary": "/books",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "ISBN13": {
+                        "type": "string"
+                      },
+                      "author": {
+                        "type": "string"
+                      },
+                      "priceCents": {
+                        "type": "number"
+                      },
+                      "orderIDs": {
+                        "type": "array",
+                        "items": {}
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "title",
+                      "ISBN13",
+                      "author",
+                      "priceCents",
+                      "orderIDs"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": []
+      }
+    },
+    "/users/{userId}/orders": {
+      "get": {
+        "summary": "/users/{userId}/orders",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/orders": {
+      "post": {
+        "summary": "/orders",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "63e759d519d80c49d88298df"
+                    },
+                    "userId": {
+                      "type": "string",
+                      "example": "63e7526e0a14535f469643fd"
+                    },
+                    "bookIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": [
+                        "63e755d13f672fa7ce5a3d87"
+                      ]
+                    },
+                    "totalPriceCents": {
+                      "type": "number",
+                      "example": 1899
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2023-02-11T09:03:17.153Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The userId passed not exist"
+                    },
+                    "details": {
+                      "type": "object",
+                      "properties": {
+                        "userId": {
+                          "type": "string",
+                          "example": "63e349438dcb088f66544d91"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": []
+      },
+      "get": {
+        "summary": "/orders",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {}
+                }
+              }
+            }
+          }
+        },
+        "tags": []
+      }
+    },
+    "/users": {
+      "get": {
+        "summary": "/users",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "email",
+                      "name"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": []
+      },
+      "post": {
+        "summary": "/users",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "63e75a2d19d80c49d88298e0"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "teste@fakeprovider.com"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Fulano 2"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The email passed is in user by another account"
+                    },
+                    "details": {
+                      "type": "object",
+                      "properties": {
+                        "email": {
+                          "type": "string",
+                          "example": "dsadasdasdasdasdasd@gmail.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": []
+      }
+    }
+  },
+  "tags": []
+}
