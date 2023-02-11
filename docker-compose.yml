@@ -14,6 +14,7 @@ services:
     command: sh -c "npm ci && npm run dev"
     environment:
       - DATABASE_URL=$MONGO_DB_DATABASE
+      - DATABASE_URL_TEST=$MONGO_DB_DATABASE_TEST
       - APP_PORT
       - NODE_ENV=dev
   mongo1:

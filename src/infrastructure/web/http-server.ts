@@ -12,6 +12,7 @@ export const createHttpServer = (routes: IHttpRoute[]) => {
   return {
     info: {
       port,
+      app,
     },
     start: () => startHttpServer(port, app)
   };
