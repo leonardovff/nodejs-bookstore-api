@@ -14,7 +14,7 @@ describe('Orders routers', () => {
     await dbClient.book.deleteMany();
     disconnect();
   });
-  test('should create a new order', async () => {
+  test('POST /orders should create a new order', async () => {
     await connect();
     const books = await booksSeed({ Book: dbClient.book });
     const users = await usersSeed({ User: dbClient.user });

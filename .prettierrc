@@ -5,5 +5,5 @@
   "singleQuote": true,
   "semicolon": true,
   "quoteProps": "preserve",
-  "bracketSpacing": false
+  "bracketSpacing": true
 }
