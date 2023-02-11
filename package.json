@@ -5,11 +5,12 @@
   "main": "server.js",
   "scripts": {
     "prepare": "husky install",
-    "test": "DATABASE_URL=$DATABASE_URL_TEST jest",
     "dev": "node --inspect=0.0.0.0 --require ./src/infrastructure/suppress-experimental-fetch-warnings.js --watch --trace-warnings --experimental-loader ts-node/esm ./init.ts",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "jest",
+    "test:e2e": "DATABASE_URL=$DATABASE_URL_TEST jest -c src/e2e/jest.e2e.config.ts --runInBand",
     "lint": "eslint . --ext .ts",
-    "seed": "ts-node src/infrastructure/database/seed.ts",
-    "prepare": "husky install"
+    "seed": "ts-node src/infrastructure/database/seed.ts"
   },
   "repository": {
     "type": "git",

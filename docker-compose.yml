@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   node:
-    image: node:19.5.0
+    build: .
     expose:
       - $APP_PORT
       - 9229
@@ -16,7 +16,7 @@ services:
       - DATABASE_URL=$MONGO_DB_DATABASE
       - DATABASE_URL_TEST=$MONGO_DB_DATABASE_TEST
       - APP_PORT
-      - NODE_ENV=dev
+      - NODE_ENV=NODE_ENV
   mongo1:
     image: mongo:5
     container_name: mongo1

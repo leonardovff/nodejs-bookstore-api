@@ -43,12 +43,17 @@ docker compose up node
 
 ## Run commands inside the node container
 ```bash
-docker compose exec node bash
+docker compose exec node sh
 ```
 
 ### Seed the database
 ```bash
 docker compose exec node sh -c 'npm run seed'
+```
+
+### Run lint
+```bash
+docker compose exec node sh -c 'npm run lint'
 ```
 
 ### Run tests

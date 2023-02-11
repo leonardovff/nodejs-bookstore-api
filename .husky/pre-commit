@@ -1,5 +1,12 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run test
-npm run lint
+# if [ -z "$husky_skip_init" ]; then
+if command -v docker &> /dev/null
+then
+  docker compose exec -T node sh -c 'npm run lint'
+  docker compose exec -T node sh -c 'npm run test'
+else
+  npm run lint
+  npm run test
+fi
