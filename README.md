@@ -41,9 +41,22 @@ docker compose up -d mongo-ui
 docker compose up node
 ```
 
-### Run commands inside the node container
+## Run commands inside the node container
 ```bash
 docker compose exec node bash
+```
+
+### Seed the database
+```bash
+docker compose exec node sh -c 'npm run seed'
+```
+
+### Run tests
+```bash
+docker compose exec node sh -c 'npm run test'
+
+# if you want you can run it in watch mode
+docker compose exec node sh -c 'npm run test -- --watchAll'
 ```
 
 
