@@ -4,8 +4,10 @@ services:
     image: node:19.5.0
     expose:
       - $APP_PORT
+      - 9229
     ports:
       - $APP_PORT:$APP_PORT
+      - $DEBUG_PORT:9229
     volumes:
       - .:/app
     working_dir: '/app'
