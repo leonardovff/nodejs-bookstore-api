@@ -63,4 +63,22 @@ describe('Users routers:', () => {
       message: '"name" is required'
     });
   });
+
+  test('POST /users should not create a user when the email passed is already in use by another user', async () => {
+    await connect();
+    const baseRequest = () => request(app)
+      .post('/users')
+      .set('Accept', 'application/json');
+    await baseRequest()
+      .send({email: 'samemail@fakeprovider@gmail.com', name: 'john teste'})
+      .expect(200);
+
+    const response2 = await baseRequest()
+      .send({email: 'samemail@fakeprovider@gmail.com', name: 'another user teste'})
+      .expect(409);
+
+    expect(response2.body).toMatchObject({
+      message: 'The email passed is in user by another account',
+    });
+  });
 });

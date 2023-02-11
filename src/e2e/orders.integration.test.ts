@@ -37,4 +37,71 @@ describe('Orders routers', () => {
       totalPriceCents,
     });
   });
+
+
+  test('GET /orders should return all the orders', async () => {
+    await connect();
+    const books = await booksSeed({ Book: dbClient.book });
+    const users = await usersSeed({ User: dbClient.user });
+    const baseRequest = () => request(app)
+      .post('/orders')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200);
+    await baseRequest()
+      .send({
+        userId: users[0].id,
+        booksIds: [books[1].id, books[0].id]
+      });
+    await baseRequest()
+      .send({
+        userId: users[1].id,
+        booksIds: [books[2].id, books[3].id]
+      });
+
+    const response = await request(app)
+      .get('/orders')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200);
+
+    expect(response.body.length).toEqual(2);
+  });
+
+
+  test('GET /users/:id/orders/ should return all the orders for the user passed', async () => {
+    await connect();
+    const books = await booksSeed({ Book: dbClient.book });
+    const users = await usersSeed({ User: dbClient.user });
+    const user = users[0].id;
+    const anotherUser = users[1].id;
+    const book = books[1];
+    const baseRequest = () => request(app)
+      .post('/orders')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200);
+    await baseRequest()
+      .send({
+        userId: user,
+        booksIds: [book.id]
+      });
+    await baseRequest()
+      .send({
+        userId: anotherUser,
+        booksIds: [books[2].id, books[3].id]
+      });
+
+    const response = await request(app)
+      .get(`/users/${user}/orders`)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200);
+
+    expect(response.body.length).toEqual(1);
+    const { id, author, title, ISBN13 } = book;
+    expect(response.body[0].books).toMatchObject([{
+      id, author, title, ISBN13
+    }]);
+  });
 });
