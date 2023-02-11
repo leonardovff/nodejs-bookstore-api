@@ -7,11 +7,11 @@ const { info: { app }} = createHttpServer(appRoutes);
 
 describe('Users routers', () => {
   afterEach(async () => {
+    // await dbClient.order.deleteMany();
     await dbClient.user.deleteMany();
   });
   test('should create a new user', async () => {
     await connect();
-    request(app);
 
     await request(app)
       .post('/users')
