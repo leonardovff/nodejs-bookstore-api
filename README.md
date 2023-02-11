@@ -41,6 +41,9 @@ docker compose up -d mongo-ui
 docker compose up node
 ```
 
+## API documentation
+By default a open api documentation and swagger ui is generated and is available the /api-docs endpoint
+
 ## Run commands inside the node container
 ```bash
 docker compose exec node sh
@@ -63,7 +66,6 @@ docker compose exec node sh -c 'npm run test'
 # if you want you can run it in watch mode
 docker compose exec node sh -c 'npm run test -- --watchAll'
 ```
-
 
 ### To improve developer experience - we recommend:
 - Use in vscode the following extensions:
