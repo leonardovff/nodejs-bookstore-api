@@ -23,10 +23,10 @@ const books = [{
   priceCents: 3343
 },];
 
-const booksSeed = (dbClient) => {
+const booksSeed = ({ Book }) => {
   const booksPromises = books.map(({
     title, ISBN13, author, priceCents
-  }) => (dbClient.book.upsert({
+  }) => (Book.upsert({
     where: { title },
     update: {},
     create: {
