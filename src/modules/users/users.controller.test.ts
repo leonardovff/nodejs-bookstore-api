@@ -71,14 +71,13 @@ describe('UsersController - createUser', () => {
     });
   });
 
-
   test(`should return not request the UserService to create a user and return 422
     when passed missing data (email/name)`, async () => {
     jest.spyOn(UsersService, 'createUser');
 
     const { code, payload } = await createUser({
       body: {
-        email: 'leonardovff@gmail.com',
+        email: 'fakeuser@fakeprovider.com',
         name: undefined,
       },
     });
@@ -87,6 +86,33 @@ describe('UsersController - createUser', () => {
     expect(code).toEqual(422);
     expect(payload).toMatchObject({
       'message': '"name" is required',
+    });
+  });
+
+  test('should return 409 with error message when the email passed is in user by another user', async () => {
+    const userData = {
+      email: 'fakeuser@fakeprovider.com',
+      name: 'fake user',
+    };
+    jest.spyOn(UsersService, 'createUser').mockReturnValue(
+      Promise.resolve({
+        error: {
+          type: 'UserAlreadyExistWithTheSameEmail',
+          details: {
+            email: userData.email
+          },
+        },
+      })
+    );
+
+    const { code, payload } = await createUser({
+      body: userData
+    });
+
+    expect(UsersService.createUser).toHaveBeenCalled();
+    expect(code).toEqual(409);
+    expect(payload).toMatchObject({
+      'message': 'The email passed is in user by another account',
     });
   });
 });
