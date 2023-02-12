@@ -15,18 +15,18 @@ const UsersData = [
   },
 ];
 
-describe('UsersController - getUsers', () => {
+describe('UsersService - getUsers', () => {
   afterEach(() => {
     jest.restoreAllMocks();
   });
-  test('should return success (200) and return all user data', async () => {
+  test('should return all users data', async () => {
     jest.spyOn(dbClient.user, 'findMany').mockResolvedValue(UsersData);
 
     const users = await UsersService.getUsers({});
 
     expect(users).toMatchObject(UsersData);
   });
-  test('should return success (200) and return all user data', async () => {
+  test('should return all user data for the userId passed', async () => {
     const userToFind = UsersData[0];
     jest.spyOn(dbClient.user, 'findMany').mockResolvedValueOnce([userToFind]);
 

@@ -29,3 +29,10 @@ export const getBooks = async ({
     where
   });
 };
+
+const BooksService = {
+  getBooks,
+  getBooksPrice,
+};
+
+export default BooksService;
