@@ -1,4 +1,4 @@
-import * as BookService from './books.service';
+import BookService from './books.service';
 
 export const getBooks = async () => {
   const books = await BookService.getBooks({});
