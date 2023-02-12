@@ -20,7 +20,7 @@ describe('UsersController - getUsers', () => {
     jest.restoreAllMocks();
   });
   test('should return success (code=200) and all the user data in the payload', async () => {
-    jest.spyOn(UsersService, 'getUsers').mockReturnValue(Promise.resolve(UsersData));
+    jest.spyOn(UsersService, 'getUsers').mockResolvedValue(UsersData);
     const { code, payload } = await getUsers();
 
     expect(code).toEqual(200);
@@ -37,14 +37,12 @@ describe('UsersController - createUser', () => {
       email: 'fakeUser',
       name: 'fakeUser@fakerprovider.com',
     };
-    jest.spyOn(UsersService, 'createUser').mockReturnValue(
-      Promise.resolve({
-        data: {
-          ...userData,
-          id: randomUUID(),
-        },
-      })
-    );
+    jest.spyOn(UsersService, 'createUser').mockResolvedValue({
+      data: {
+        ...userData,
+        id: randomUUID(),
+      },
+    });
 
     const { code, payload } = await createUser({ body: userData });
 
@@ -94,16 +92,14 @@ describe('UsersController - createUser', () => {
       email: 'fakeuser@fakeprovider.com',
       name: 'fake user',
     };
-    jest.spyOn(UsersService, 'createUser').mockReturnValue(
-      Promise.resolve({
-        error: {
-          type: 'UserAlreadyExistWithTheSameEmail',
-          details: {
-            email: userData.email
-          },
+    jest.spyOn(UsersService, 'createUser').mockResolvedValue({
+      error: {
+        type: 'UserAlreadyExistWithTheSameEmail',
+        details: {
+          email: userData.email
         },
-      })
-    );
+      },
+    });
 
     const { code, payload } = await createUser({
       body: userData
