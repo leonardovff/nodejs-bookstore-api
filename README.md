@@ -1,6 +1,8 @@
 # BOOKSTORE NODE.JS API
 A bookstore API created using node.js, typescript/javascript, mongodb, prisma orm, and jest.
 
+Trying to follow the depency rule and layers described in clean architecture, but avoiding to use or create a dependency injection mechanism.
+
 ## Requirements to run the project
 Docker and docker compose (it is installed together with docker in the last versions)
 
