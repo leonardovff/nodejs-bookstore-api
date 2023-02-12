@@ -2,21 +2,9 @@ import { randomUUID } from 'crypto';
 import dbClient from '../../infrastructure/database/database-client';
 import { BooksService } from '../books';
 import { UsersService } from '../users';
+import { generateOrderData } from './orders';
 import OrdersService from './orders.service';
 
-const generateOrderData = ({
-  id = randomUUID(),
-  userId = randomUUID(),
-  bookIds = [randomUUID()],
-  totalPriceCents = 5031,
-  createdAt = new Date('2022-12-06')
-}) => ({
-  id,
-  userId,
-  bookIds,
-  totalPriceCents,
-  createdAt,
-});
 describe('OrdersService - getOrders', () => {
   afterEach(() => {
     jest.restoreAllMocks();
