@@ -46,7 +46,6 @@ describe('OrdersControler - getOrdersForOneUser', () => {
   });
 });
 
-
 describe('OrdersControler - createOrder', () => {
   afterEach(() => {
     jest.restoreAllMocks();
@@ -55,46 +54,84 @@ describe('OrdersControler - createOrder', () => {
     const orderData = generateOrderData({});
     const { userId, bookIds } = orderData;
     jest.spyOn(OrdersService, 'createOrder').mockResolvedValue({
-      data: orderData
+      data: orderData,
     });
 
-    const { code, payload } = await createOrder({ body: {
-      userId, booksIds: bookIds
-    }});
+    const { code, payload } = await createOrder({
+      body: {
+        userId,
+        booksIds: bookIds,
+      },
+    });
 
     expect(OrdersService.createOrder).toHaveBeenCalledWith({
-      userId, booksIds: bookIds
-    }),
+      userId,
+      booksIds: bookIds,
+    });
     expect(code).toEqual(200);
     expect(payload).toMatchObject(orderData);
   });
 
   test('should not create a order and return the 404 when the userId passed not exist', async () => {
     jest.spyOn(OrdersService, 'createOrder').mockResolvedValue({
-      error: {type: 'UserNotFound', details: ''}
+      error: { type: 'UserNotFound', details: '' },
     });
 
-    const { code, payload } = await createOrder({ body: {
-      userId: randomUUID(), booksIds: [randomUUID()]
-    }});
+    const { code, payload } = await createOrder({
+      body: {
+        userId: randomUUID(),
+        booksIds: [randomUUID()],
+      },
+    });
 
     expect(code).toEqual(404);
-    expect(payload).toMatchObject({ message: 'The userId passed not exist'});
+    expect(payload).toMatchObject({ message: 'The userId passed not exist' });
   });
 
   test('should not create a order and return the 404 when the bookId passed not exist', async () => {
-    const orderData = generateOrderData({});
-    const { userId, bookIds } = orderData;
     jest.spyOn(OrdersService, 'createOrder').mockResolvedValue({
-      error: {type: 'BookNotFound', details: ''}
+      error: { type: 'BookNotFound', details: '' },
     });
 
-    const { code, payload } = await createOrder({ body: {
-      userId, booksIds: bookIds
-    }});
+    const { code, payload } = await createOrder({
+      body: {
+        userId: randomUUID(),
+        booksIds: [randomUUID()],
+      },
+    });
 
     expect(code).toEqual(404);
-    expect(payload).toMatchObject({ message: 'Some bookId passed not exist'});
+    expect(payload).toMatchObject({ message: 'Some bookId passed not exist' });
   });
-  // TODO: validate input data
+
+  test('should not request the creation of a order and return the 422 when not passed userId/booksIds', async () => {
+    jest.spyOn(OrdersService, 'createOrder');
+
+    const { code, payload } = await createOrder({
+      body: {
+        userId: undefined,
+        booksIds: [randomUUID()],
+      },
+    });
+
+    expect(OrdersService.createOrder).not.toHaveBeenCalled();
+    expect(code).toEqual(422);
+    expect(payload).toMatchObject({ message: '"userId" is required' });
+  });
+
+  test(`should not request the creation of a order and return the 422
+    when userId/bookIds is passed on the wrong format`, async () => {
+    jest.spyOn(OrdersService, 'createOrder');
+
+    const { code, payload } = await createOrder({
+      body: {
+        userId: undefined,
+        booksIds: [randomUUID()],
+      },
+    });
+
+    expect(OrdersService.createOrder).not.toHaveBeenCalled();
+    expect(code).toEqual(422);
+    expect(payload).toMatchObject({ message: '"userId" is required' });
+  });
 });

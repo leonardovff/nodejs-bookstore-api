@@ -1,6 +1,22 @@
+import Validator from 'joi';
 import OrdersService from './orders.service';
 
+const createOrderSchema = Validator.object({
+  userId: Validator.string().required(),
+  booksIds: Validator.array().items(Validator.string()).required(),
+});
+
 export const createOrder = async ({ body: { userId, booksIds }}) => {
+  const validation = createOrderSchema.validate({ userId, booksIds });
+  if (validation.error) {
+    return {
+      code: 422,
+      payload: {
+        message: validation.error.message,
+        details: { email: 'string', name: 'string' },
+      },
+    };
+  }
   const { error, data} = await OrdersService.createOrder({
     userId,
     booksIds,
