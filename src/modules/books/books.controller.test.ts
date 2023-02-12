@@ -26,6 +26,7 @@ describe('BooksController - getBooks', () => {
       },
     ];
     jest.spyOn(BooksService, 'getBooks').mockResolvedValue(booksData);
+
     const { code, payload } = await getBooks();
 
     expect(code).toEqual(200);

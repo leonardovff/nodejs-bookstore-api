@@ -31,7 +31,7 @@ export const createOrder = async ({ userId, booksIds }) => {
 // TODO: move that to interface?
 export const getOrders = async (
   { userId } : { userId?: string },
-  fields,
+  fields?,
 ) => {
   const where = userId ? { userId } : undefined;
   const orders = await dbClient.order.findMany({
@@ -40,3 +40,10 @@ export const getOrders = async (
   });
   return orders;
 };
+
+const OrdersService = {
+  getOrders,
+  createOrder,
+};
+
+export default OrdersService;

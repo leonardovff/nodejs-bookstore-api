@@ -1,4 +1,4 @@
-import * as OrdersService from './orders.service';
+import OrdersService from './orders.service';
 
 export const createOrder = async ({ body: { userId, booksIds }}) => {
   const { error, data} = await OrdersService.createOrder({
