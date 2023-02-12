@@ -15,7 +15,7 @@ const createUser = async ({ email, name }) => {
   }
 
   return {
-    userCreated: await dbClient.user.create({
+    data: await dbClient.user.create({
       data
     })
   };

@@ -2,7 +2,7 @@ import { randomUUID } from 'crypto';
 import Users from './users';
 
 
-describe('Orders entity - createUser', () => {
+describe('Users entity - createUser', () => {
   test('should validate and create a new user', () => {
     const userData = { email: 'test@gmail.com', name: 'test'};
 

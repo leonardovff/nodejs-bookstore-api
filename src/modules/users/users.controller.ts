@@ -17,7 +17,7 @@ export const createUser = async ({ body: { email, name } }) => {
       },
     };
   }
-  const { userCreated, error } = await UsersService.createUser({ email, name });
+  const { data, error } = await UsersService.createUser({ email, name });
   if (error) {
     const errors = {
       UserAlreadyExistWithTheSameEmail: {
@@ -28,7 +28,7 @@ export const createUser = async ({ body: { email, name } }) => {
     const { code, message } = errors[error.type] || { message: 'NotMapped', code: 500 };
     return { code, payload: { message, details: error.details } };
   }
-  return { code: 200, payload: userCreated };
+  return { code: 200, payload: data };
 };
 
 export const getUsers = async () => {
